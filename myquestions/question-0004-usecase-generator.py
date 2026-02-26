@@ -4,45 +4,42 @@ import numpy as np
 def generar_caso_de_uso_detectar_data_drift():
     np.random.seed()
 
-    n = 100
+    n = 300
 
     df_base = pd.DataFrame({
-        "A": np.random.normal(0, 1, n),
-        "B": np.random.normal(5, 2, n),
-        "C": np.random.normal(-3, 1, n)
+        "feature1": np.random.normal(0, 1, n),
+        "feature2": np.random.normal(5, 2, n),
+        "feature3": np.random.normal(-2, 1.5, n)
     })
 
     df_nuevo = pd.DataFrame({
-        "A": np.random.normal(0.2, 1, n),
-        "B": np.random.normal(6, 2, n),
-        "C": np.random.normal(-3, 1, n)
+        "feature1": np.random.normal(0.5, 1, n),
+        "feature2": np.random.normal(5, 2.5, n),
+        "feature3": np.random.normal(-1.5, 1.5, n)
     })
 
-    columnas = ["A", "B", "C"]
-    umbral = 0.1
+    threshold = np.random.uniform(0.1, 0.3)
 
-    metricas = {}
-    columnas_con_drift = []
+    media_base = df_base.mean()
+    media_nuevo = df_nuevo.mean()
 
-    for col in columnas:
-        media_base = df_base[col].mean()
-        media_nuevo = df_nuevo[col].mean()
+    diferencia_relativa = abs(media_base - media_nuevo) / abs(media_base)
 
-        diferencia = abs(media_base - media_nuevo) / abs(media_base)
-        metricas[col] = diferencia
+    drift_detectado = diferencia_relativa > threshold
 
-        if diferencia > umbral:
-            columnas_con_drift.append(col)
+    output_df = pd.DataFrame({
+        "media_base": media_base,
+        "media_nuevo": media_nuevo,
+        "diferencia_relativa": diferencia_relativa,
+        "drift_detectado": drift_detectado
+    })
 
-    return {
-        "input": {
-            "df_base": df_base,
-            "df_nuevo": df_nuevo,
-            "columnas": columnas,
-            "umbral": umbral
-        },
-        "output": {
-            "columnas_con_drift": columnas_con_drift,
-            "metricas": metricas
-        }
+    input_data = {
+        "df_base": df_base,
+        "df_nuevo": df_nuevo,
+        "threshold": threshold
     }
+
+    output_data = output_df
+
+    return input_data, output_data
