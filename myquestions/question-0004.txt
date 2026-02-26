@@ -1,0 +1,38 @@
+# Problema
+
+En entornos productivos de machine learning es común que la distribución
+de los datos cambie con el tiempo. Este fenómeno se conoce como "data drift"
+y puede afectar significativamente el desempeño de un modelo entrenado.
+
+Se requiere implementar una función que permita comparar dos conjuntos de datos
+y detectar si existen cambios significativos en la distribución de variables numéricas.
+
+Implemente la función:
+
+detectar_data_drift(df_base, df_nuevo, columnas, umbral=0.1)
+
+La función recibe:
+
+- df_base: DataFrame de referencia (dataset original).
+- df_nuevo: DataFrame nuevo que se desea comparar.
+- columnas: lista de columnas numéricas a evaluar.
+- umbral: valor que determina cuándo se considera que existe drift.
+
+La función debe:
+
+1. Para cada columna especificada:
+   - Calcular la media en df_base.
+   - Calcular la media en df_nuevo.
+   - Calcular la diferencia absoluta normalizada con respecto
+     a la media del dataset base.
+2. Determinar que existe drift si la diferencia normalizada es mayor que el umbral.
+3. Retornar un diccionario con la siguiente estructura:
+
+{
+  "columnas_con_drift": lista_de_columnas_con_drift,
+  "metricas": {
+      "columna_1": valor_diferencia,
+      "columna_2": valor_diferencia,
+      ...
+  }
+}
