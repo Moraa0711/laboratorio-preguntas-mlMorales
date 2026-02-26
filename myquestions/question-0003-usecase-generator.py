@@ -13,7 +13,7 @@ def generar_caso_de_uso_analizar_curva_aprendizaje():
         random_state=None
     )
 
-    modelo = RandomForestClassifier()
+    modelo = RandomForestClassifier(random_state=42)
 
     train_sizes, train_scores, val_scores = learning_curve(
         modelo,
