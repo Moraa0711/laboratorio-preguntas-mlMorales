@@ -1,0 +1,34 @@
+# Problema
+
+En proyectos de machine learning es común trabajar con datasets que contienen
+muchas variables predictoras. Sin embargo, no todas las variables aportan información
+relevante para el modelo.
+
+Se desea implementar un procedimiento automático que seleccione las variables
+más importantes utilizando la importancia de características generada por un modelo
+de Random Forest.
+
+Implemente la función:
+
+seleccionar_features_por_importancia(X, y, modelo_tipo="random_forest", top_k=5)
+
+La función recibe:
+
+- X: matriz de características (numpy array o DataFrame).
+- y: vector objetivo.
+- modelo_tipo: tipo de modelo a utilizar (para este ejercicio solo se admite "random_forest").
+- top_k: número de variables más importantes que se deben seleccionar.
+
+La función debe:
+
+1. Determinar automáticamente si el problema es de clasificación o regresión,
+   dependiendo del tipo de variable objetivo y.
+2. Instanciar:
+   - RandomForestClassifier si el problema es de clasificación.
+   - RandomForestRegressor si el problema es de regresión.
+3. Ajustar el modelo a los datos.
+4. Obtener la importancia de cada variable usando el atributo feature_importances_.
+5. Seleccionar las top_k variables con mayor importancia.
+6. Retornar una tupla que contenga:
+   - Lista con los índices de las variables seleccionadas.
+   - Matriz X_filtrado que contenga únicamente esas variables.
