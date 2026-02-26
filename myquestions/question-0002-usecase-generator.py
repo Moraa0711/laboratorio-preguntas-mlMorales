@@ -10,7 +10,7 @@ def generar_caso_de_uso_seleccionar_features_por_importancia():
     X = np.random.randn(n_samples, n_features)
     y = np.random.randint(0, 2, size=n_samples)
 
-    modelo = RandomForestClassifier()
+    modelo = RandomForestClassifier(random_state=42)
     modelo.fit(X, y)
 
     importancias = modelo.feature_importances_
