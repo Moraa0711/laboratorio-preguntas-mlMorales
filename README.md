@@ -3,8 +3,10 @@
 # Laboratorio - Creación de Preguntas (Machine Learning)
 
 Estudiante: Juan Camilo Morales Villada
+
 Correo institucional: juancamilo.morales@udea.edu.co
 Curso: Modelos y simulación de Sistemas 
+
 Profesor: Raúl Ramos
 
 ## Descripción
