@@ -4,26 +4,33 @@ from sklearn.ensemble import RandomForestClassifier
 def generar_caso_de_uso_seleccionar_features_por_importancia():
     np.random.seed()
 
-    n_samples = 100
-    n_features = 10
+    n_samples = 200
+    n_features = 8
 
-    X = np.random.rand(n_samples, n_features)
+    X = np.random.randn(n_samples, n_features)
     y = np.random.randint(0, 2, size=n_samples)
 
     modelo = RandomForestClassifier()
     modelo.fit(X, y)
 
     importancias = modelo.feature_importances_
-    top_k = 5
-    indices = np.argsort(importancias)[-top_k:][::-1]
-    X_filtrado = X[:, indices]
 
-    return {
-        "input": {
-            "X": X,
-            "y": y,
-            "modelo_tipo": "random_forest",
-            "top_k": top_k
-        },
-        "output": (list(indices), X_filtrado)
+    top_k = np.random.randint(2, 6)
+
+    indices_ordenados = np.argsort(importancias)[::-1]
+    top_indices = indices_ordenados[:top_k]
+
+    X_reducido = X[:, top_indices]
+
+    input_data = {
+        "X": X,
+        "y": y,
+        "top_k": top_k
     }
+
+    output_data = {
+        "indices_seleccionados": top_indices,
+        "X_reducido": X_reducido
+    }
+
+    return input_data, output_data
