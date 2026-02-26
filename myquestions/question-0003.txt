@@ -1,0 +1,41 @@
+# Problema
+
+Durante el entrenamiento de modelos de machine learning es fundamental evaluar
+si el modelo está sobreajustando (overfitting), subajustando (underfitting)
+o si presenta un buen nivel de generalización.
+
+Una forma estándar de realizar este análisis es mediante curvas de aprendizaje,
+las cuales permiten observar cómo evolucionan los scores de entrenamiento
+y validación a medida que aumenta el tamaño del conjunto de datos.
+
+Implemente la función:
+
+analizar_curva_aprendizaje(X, y, modelo, cv=5)
+
+La función recibe:
+
+- X: matriz de características.
+- y: vector objetivo.
+- modelo: modelo de sklearn previamente instanciado.
+- cv: número de particiones para validación cruzada.
+
+La función debe:
+
+1. Utilizar learning_curve de sklearn para calcular:
+   - Scores de entrenamiento.
+   - Scores de validación.
+2. Calcular el promedio de los scores de entrenamiento.
+3. Calcular el promedio de los scores de validación.
+4. Determinar automáticamente el diagnóstico del modelo:
+
+   - "overfitting" si el score promedio de entrenamiento es considerablemente
+     mayor que el de validación.
+   - "underfitting" si ambos scores son bajos.
+   - "buen_ajuste" si ambos scores son altos y similares.
+
+5. Retornar un diccionario con la siguiente estructura:
+
+{
+  "train_mean": valor_promedio_entrenamiento,
+  "val_mean": valor_promedio_validacion,
+  "diagnostico": "overfitting" | "underfitting" | "buen_ajuste"
