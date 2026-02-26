@@ -1,0 +1,40 @@
+# Problema
+
+Una firma de análisis financiero desea monitorear el comportamiento diario de múltiples empresas
+con el fin de detectar movimientos inusuales en sus precios. Estos movimientos pueden indicar
+eventos relevantes como noticias inesperadas, reportes financieros o comportamientos atípicos del mercado.
+
+Se dispone de un DataFrame con información histórica que contiene:
+- Identificador de la empresa
+- Fecha del registro
+- Precio de cierre diario
+
+El objetivo es detectar días donde el cambio porcentual del precio sea anormalmente alto
+en comparación con la volatilidad reciente de la empresa.
+
+Implemente la función:
+
+detectar_cambios_significativos(df, empresa_col, fecha_col, precio_col, umbral=2.5)
+
+La función recibe:
+
+- df: DataFrame de pandas con los datos históricos.
+- empresa_col: nombre de la columna que identifica la empresa.
+- fecha_col: nombre de la columna que contiene la fecha (puede estar en formato string o datetime).
+- precio_col: nombre de la columna que contiene el precio.
+- umbral: valor numérico que define qué tan estricto es el criterio de anomalía.
+
+La función debe:
+
+1. Convertir la columna de fecha a formato datetime si es necesario.
+2. Ordenar los datos por empresa y fecha en orden ascendente.
+3. Calcular el retorno porcentual diario por empresa.
+4. Calcular la desviación estándar móvil de 30 días del retorno diario para cada empresa.
+5. Crear una columna llamada "evento_anomalo" que sea True cuando:
+
+   abs(retorno_diario) > umbral * volatilidad_movil
+
+6. Retornar el DataFrame original incluyendo las siguientes columnas adicionales:
+   - retorno_diario
+   - volatilidad_movil
+   - evento_anomalo
