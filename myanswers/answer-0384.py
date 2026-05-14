@@ -8,7 +8,7 @@ def reporte_especifico_clases(y_true, y_pred):
     # Identificar las clases únicas
     clases = np.unique(y_true)
     
-    # Matriz de confusión manual
+    # Matriz de confusión manual usando defaultdict
     matriz = defaultdict(lambda: defaultdict(int))
 
     for real, pred in zip(y_true, y_pred):
@@ -25,7 +25,7 @@ def reporte_especifico_clases(y_true, y_pred):
         else:
             val = verdaderos_positivos / total_reales
 
-        # Nombre de llave y redondeo exacto
+        # Importante: Llave "Clase_" y redondeo a 3 decimales
         reporte[f"Clase_{clase}"] = round(float(val), 3)
 
     return reporte
